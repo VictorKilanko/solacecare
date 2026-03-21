@@ -1,0 +1,35 @@
+{
+  "name": "SolaceCare Network",
+  "short_name": "SolaceCare",
+  "description": "Compassionate listening for people at every stage of serious illness. Peer-led. Confidential. Free. 24/7.",
+  "start_url": "/solacecare/",
+  "scope": "/solacecare/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D1E2E",
+  "theme_color": "#1C3856",
+  "categories": ["health", "medical", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Call Now",
+      "short_name": "Call",
+      "description": "Call the SolaceCare hotline",
+      "url": "/solacecare/#hotline",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
