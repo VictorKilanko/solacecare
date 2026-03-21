@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SolaceCare Network — Compassionate Listening at Every Stage of the Illness Journey</title>
-  <meta name="description" content="SolaceCare Network is a peer-led, confidential, free compassionate listening service for people at every stage of serious illness — newly diagnosed, in treatment, or long after. Founded by Victor Kilanko, PhD." />
+  <meta name="description" content="SolaceCare Network is a peer-led, confidential, free compassionate listening service for people at every stage of serious illness — newly diagnosed, in treatment, or long after." />
   <meta property="og:title" content="SolaceCare Network" />
   <meta property="og:description" content="Compassionate listening — at every stage of the illness journey. Peer-led. Confidential. Free." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%230D1E2E' stroke='%234DA8B5' stroke-width='2.5'/%3E%3Cline x1='16' y1='8' x2='16' y2='24' stroke='%23C9955A' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='8' y1='16' x2='24' y2='16' stroke='%23C9955A' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ── RESET & BASE ─────────────────────────────────── */
@@ -28,7 +31,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lato', system-ui, sans-serif;
       font-size: 16px;
       line-height: 1.75;
       font-weight: 400;
@@ -36,7 +39,7 @@
       background: var(--white);
       -webkit-font-smoothing: antialiased;
     }
-    p, li { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+    p, li { font-family: 'Lato', system-ui, sans-serif; font-weight: 400; }
 
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
@@ -102,7 +105,7 @@
       line-height: 1.2;
     }
     .logo-text .logo-name {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: 1.05rem; font-weight: 700;
       color: var(--white); letter-spacing: 0.01em;
     }
@@ -196,16 +199,23 @@
     }
     .hero-text { position: relative; z-index: 1; }
     .hero-eyebrow {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 1.6rem;
+    }
+    .hero-eyebrow span {
+      font-family: 'Lato', system-ui, sans-serif;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--gold);
-      margin-bottom: 1.4rem;
+      border: 1px solid rgba(201,149,90,0.4);
+      padding: 0.3rem 0.8rem; border-radius: 50px;
+      background: rgba(201,149,90,0.08);
     }
     .hero-headline {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-      font-weight: 700; line-height: 1.15;
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.12;
       color: var(--white);
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.6rem;
     }
     .hero-headline em {
       font-style: italic;
@@ -231,11 +241,15 @@
       top: 50%; left: 50%; transform: translate(-50%, -50%);
       border-style: solid;
     }
-    .deco-ring:nth-child(1) { width: 320px; height: 320px; border-width: 1px; border-color: rgba(77,168,181,0.12); }
-    .deco-ring:nth-child(2) { width: 260px; height: 260px; border-width: 1px; border-color: rgba(77,168,181,0.18); }
-    .deco-ring:nth-child(3) { width: 200px; height: 200px; border-width: 1.5px; border-color: rgba(77,168,181,0.28); }
-    .deco-ring:nth-child(4) { width: 140px; height: 140px; border-width: 2px; border-color: rgba(77,168,181,0.4); }
-    .deco-ring:nth-child(5) { width: 80px; height: 80px; border-width: 2.5px; border-color: var(--teal); background: rgba(77,168,181,0.08); }
+    .deco-ring:nth-child(1) { width: 320px; height: 320px; border-width: 1px; border-color: rgba(77,168,181,0.12); animation: ring-breathe 5s ease-in-out infinite; }
+    .deco-ring:nth-child(2) { width: 260px; height: 260px; border-width: 1px; border-color: rgba(77,168,181,0.18); animation: ring-breathe 5s ease-in-out 0.4s infinite; }
+    .deco-ring:nth-child(3) { width: 200px; height: 200px; border-width: 1.5px; border-color: rgba(77,168,181,0.28); animation: ring-breathe 5s ease-in-out 0.8s infinite; }
+    .deco-ring:nth-child(4) { width: 140px; height: 140px; border-width: 2px; border-color: rgba(77,168,181,0.4); animation: ring-breathe 5s ease-in-out 1.2s infinite; }
+    .deco-ring:nth-child(5) { width: 80px; height: 80px; border-width: 2.5px; border-color: var(--teal); background: rgba(77,168,181,0.08); animation: ring-breathe 5s ease-in-out 1.6s infinite; }
+    @keyframes ring-breathe {
+      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.04); }
+    }
     .deco-center {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
@@ -260,7 +274,7 @@
       margin-bottom: 0.6rem;
     }
     .section-title {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: clamp(1.8rem, 3vw, 2.5rem);
       font-weight: 700; line-height: 1.2;
       color: var(--navy); margin-bottom: 1.2rem;
@@ -285,11 +299,18 @@
     .offer-card {
       background: var(--white);
       border-top: 3px solid var(--teal);
-      border-radius: 4px;
-      padding: 1.8rem;
+      border-radius: 6px;
+      padding: 2rem;
       transition: box-shadow 0.25s, transform 0.25s;
     }
-    .offer-card:hover { box-shadow: 0 10px 34px rgba(28,56,86,0.1); transform: translateY(-2px); }
+    .offer-card:hover { box-shadow: 0 12px 38px rgba(28,56,86,0.1); transform: translateY(-3px); }
+    .offer-card.free-card {
+      border-top-color: var(--gold);
+      background: #fffcf8;
+      box-shadow: 0 4px 20px rgba(201,149,90,0.1);
+    }
+    .offer-card.free-card .offer-icon-dot { background: var(--gold); }
+    .offer-card.free-card h3 { color: var(--gold); }
     .offer-icon {
       width: 36px; height: 36px;
       background: rgba(77,168,181,0.12);
@@ -302,7 +323,7 @@
       background: var(--teal); border-radius: 50%;
     }
     .offer-card h3 {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: 1rem; font-weight: 700;
       color: var(--navy); margin-bottom: 0.5rem;
     }
@@ -342,7 +363,7 @@
     .journey-card.border-navy .journey-stage { color: var(--navy); }
 
     .journey-card h3 {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: 1.15rem; font-weight: 700;
       color: var(--dark); margin-bottom: 0.5rem;
     }
@@ -363,7 +384,7 @@
       color: var(--teal); font-size: 1.4rem; line-height: 0.9;
     }
     .journey-card blockquote {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: 0.88rem; font-style: italic;
       color: var(--navy); line-height: 1.55;
       border-left: 3px solid var(--gold);
@@ -468,7 +489,7 @@
       border-left: 4px solid var(--gold);
     }
     .story-pullquote p {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: clamp(1.1rem, 1.8vw, 1.35rem);
       font-style: italic; font-weight: 700;
       color: var(--white); line-height: 1.55;
@@ -487,7 +508,7 @@
       margin-bottom: 1rem;
     }
     .mission-box p {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: clamp(1rem, 1.6vw, 1.2rem);
       color: rgba(255,255,255,0.85); line-height: 1.7;
     }
@@ -502,7 +523,7 @@
       align-items: start;
     }
     .contact-col h3 {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: 1.15rem; font-weight: 700;
       color: var(--navy); margin-bottom: 1rem;
     }
@@ -527,7 +548,7 @@
     }
     .footer-brand { display: flex; flex-direction: column; gap: 0.3rem; }
     .footer-brand .brand-name {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       font-size: 0.95rem; font-weight: 700; color: var(--white);
     }
     .footer-brand .brand-copy {
@@ -607,7 +628,7 @@
 <!-- ═══════ HERO ════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-text">
-    <p class="hero-eyebrow">Peer-Led &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Free</p>
+    <p class="hero-eyebrow"><span>Peer-Led</span><span>Confidential</span><span>Free</span></p>
     <h1 class="hero-headline">
       When illness enters your life —<br>
       <em>we are here to listen.</em>
@@ -658,7 +679,7 @@
       <h3>Every Stage of the Journey</h3>
       <p>Whether you are newly diagnosed, deep in treatment, or years after — we are here.</p>
     </div>
-    <div class="offer-card fade-up delay-1">
+    <div class="offer-card free-card fade-up delay-1">
       <div class="offer-icon"><div class="offer-icon-dot"></div></div>
       <h3>Free. Always.</h3>
       <p>SolaceCare will never charge for listening. Not now. Not ever.</p>
@@ -812,7 +833,7 @@
 <footer>
   <div class="footer-brand">
     <div class="brand-name">SolaceCare Network</div>
-    <div class="brand-copy">© 2025 SolaceCare Network &nbsp;·&nbsp; Founded by Victor Kilanko, PhD</div>
+    <div class="brand-copy">© 2025 SolaceCare Network &nbsp;·&nbsp; Peer-Led · Confidential · Free</div>
   </div>
   <div class="footer-links">
     <a href="#offer">About</a>
@@ -820,7 +841,6 @@
     <a href="#story">Our Story</a>
     <a href="#contact">Contact</a>
   </div>
-  <a href="https://victorkilanko.github.io" class="footer-back">← Back to victorkilanko.github.io</a>
 </footer>
 
 <script>
