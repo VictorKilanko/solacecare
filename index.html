@@ -133,8 +133,13 @@
       text-transform: uppercase;
       transition: background 0.2s, transform 0.2s;
       white-space: nowrap;
+      animation: btn-pulse 2.8s ease-in-out infinite;
     }
-    .btn-nav:hover { background: #b8854a; transform: translateY(-1px); }
+    .btn-nav:hover { background: #b8854a; transform: translateY(-1px); animation: none; }
+    @keyframes btn-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,149,90,0.55); transform: scale(1); }
+      50%       { box-shadow: 0 0 0 10px rgba(201,149,90,0); transform: scale(1.04); }
+    }
 
     /* Hamburger */
     .hamburger {
@@ -241,14 +246,14 @@
       top: 50%; left: 50%; transform: translate(-50%, -50%);
       border-style: solid;
     }
-    .deco-ring:nth-child(1) { width: 320px; height: 320px; border-width: 1px; border-color: rgba(77,168,181,0.12); animation: ring-breathe 5s ease-in-out infinite; }
-    .deco-ring:nth-child(2) { width: 260px; height: 260px; border-width: 1px; border-color: rgba(77,168,181,0.18); animation: ring-breathe 5s ease-in-out 0.4s infinite; }
-    .deco-ring:nth-child(3) { width: 200px; height: 200px; border-width: 1.5px; border-color: rgba(77,168,181,0.28); animation: ring-breathe 5s ease-in-out 0.8s infinite; }
-    .deco-ring:nth-child(4) { width: 140px; height: 140px; border-width: 2px; border-color: rgba(77,168,181,0.4); animation: ring-breathe 5s ease-in-out 1.2s infinite; }
-    .deco-ring:nth-child(5) { width: 80px; height: 80px; border-width: 2.5px; border-color: var(--teal); background: rgba(77,168,181,0.08); animation: ring-breathe 5s ease-in-out 1.6s infinite; }
+    .deco-ring:nth-child(1) { width: 320px; height: 320px; border-width: 1.5px; border-color: rgba(77,168,181,0.35); animation: ring-breathe 4s ease-in-out infinite; }
+    .deco-ring:nth-child(2) { width: 260px; height: 260px; border-width: 1.5px; border-color: rgba(77,168,181,0.5); animation: ring-breathe 4s ease-in-out 0.5s infinite; }
+    .deco-ring:nth-child(3) { width: 200px; height: 200px; border-width: 2px; border-color: rgba(77,168,181,0.65); animation: ring-breathe 4s ease-in-out 1s infinite; }
+    .deco-ring:nth-child(4) { width: 140px; height: 140px; border-width: 2px; border-color: rgba(77,168,181,0.8); animation: ring-breathe 4s ease-in-out 1.5s infinite; }
+    .deco-ring:nth-child(5) { width: 80px; height: 80px; border-width: 3px; border-color: var(--teal); background: rgba(77,168,181,0.15); animation: ring-breathe 4s ease-in-out 2s infinite; }
     @keyframes ring-breathe {
-      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.04); }
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.96); }
+      50%       { opacity: 1; transform: translate(-50%, -50%) scale(1.06); box-shadow: 0 0 18px rgba(77,168,181,0.3); }
     }
     .deco-center {
       position: absolute; top: 50%; left: 50%;
@@ -460,9 +465,16 @@
       border-top: 1px solid rgba(255,255,255,0.08);
     }
     .hotline-cta .btn-gold { font-size: 1rem; padding: 1rem 3rem; }
+    .hotline-number {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 600; color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.2rem;
+    }
     .hotline-pills {
       margin-top: 1rem;
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; color: rgba(255,255,255,0.4);
     }
 
@@ -619,7 +631,7 @@
     <li><a href="#story">Our Story</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#hotline" class="btn-nav">Call Now</a>
+  <a href="#hotline" class="btn-nav">Talk to Someone</a>
   <button class="hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -634,10 +646,10 @@
       <em>we are here to listen.</em>
     </h1>
     <p class="hero-sub">
-      Wherever you are in the journey — newly diagnosed, in treatment, or long after — SolaceCare Network exists for you.
+      Wherever you are in the journey — newly diagnosed, in treatment, or long after — SolaceCare Network exists for you. You don't need the right words. You just need to call.
     </p>
     <div class="hero-btns">
-      <a href="#hotline" class="btn btn-gold">Call the Hotline</a>
+      <a href="#hotline" class="btn btn-gold">Talk to Someone</a>
       <a href="#offer" class="btn btn-outline-white">Learn More</a>
     </div>
   </div>
@@ -781,8 +793,9 @@
   </div>
 
   <div class="hotline-cta fade-up">
-    <a href="#contact" class="btn btn-gold">Call the Hotline</a>
-    <p class="hotline-pills">Free &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Peer-Led</p>
+    <div class="hotline-number">care@solacecarenetwork.org</div>
+    <a href="mailto:care@solacecarenetwork.org" class="btn btn-gold">Reach Out Now</a>
+    <p class="hotline-pills">Free &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Peer-Led &nbsp;·&nbsp; No Referral Needed</p>
   </div>
 </section>
 
