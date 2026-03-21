@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolaceCare Network — Compassionate Listening at Every Stage of the Illness Journey</title>
+  <meta name="description" content="SolaceCare Network is a peer-led, confidential, free compassionate listening service for people at every stage of serious illness — newly diagnosed, in treatment, or long after. Founded by Victor Kilanko, PhD." />
+  <meta property="og:title" content="SolaceCare Network" />
+  <meta property="og:description" content="Compassionate listening — at every stage of the illness journey. Peer-led. Confidential. Free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%230D1E2E' stroke='%234DA8B5' stroke-width='2.5'/%3E%3Cline x1='16' y1='8' x2='16' y2='24' stroke='%23C9955A' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='8' y1='16' x2='24' y2='16' stroke='%23C9955A' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <style>
+    /* ── RESET & BASE ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1C3856;
+      --teal:   #4DA8B5;
+      --gold:   #C9955A;
+      --cream:  #F7F3EE;
+      --dark:   #0D1E2E;
+      --white:  #FFFFFF;
+      --gray:   #555;
+      --lgray:  #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 16px;
+      line-height: 1.75;
+      font-weight: 400;
+      color: #1a1a1a;
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    p, li { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── SCROLL ANIMATIONS ────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+    .delay-6 { transition-delay: 0.6s; }
+
+    /* ── NAV ──────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%;
+      height: 68px;
+      background: rgba(28, 56, 86, 0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201, 149, 90, 0.2);
+    }
+
+    /* Logo */
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-mark {
+      width: 38px; height: 38px;
+      position: relative; flex-shrink: 0;
+    }
+    .logo-circle {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 2.5px solid var(--teal);
+      position: absolute; top: 0; left: 0;
+    }
+    .logo-hand {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .logo-hand::before {
+      content: '';
+      position: absolute; top: -6px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 14px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .logo-text {
+      line-height: 1.2;
+    }
+    .logo-text .logo-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.01em;
+    }
+    .logo-text .logo-sub {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .btn-nav {
+      display: inline-block;
+      background: var(--gold); color: var(--white);
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .btn-nav:hover { background: #b8854a; transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      width: 22px; height: 2px; background: var(--white);
+      border-radius: 2px; display: block; transition: 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-links.nav-open {
+      display: flex; flex-direction: column;
+      position: absolute; top: 68px; left: 0; right: 0;
+      background: rgba(13, 30, 46, 0.98);
+      padding: 1.5rem 6%; gap: 1.2rem;
+      border-bottom: 1px solid rgba(201, 149, 90, 0.2);
+    }
+
+    /* ── BUTTONS ──────────────────────────────────────── */
+    .btn {
+      display: inline-block; padding: 0.8rem 1.8rem;
+      font-size: 0.84rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; border-radius: 4px;
+      transition: all 0.22s; cursor: pointer; border: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--white); }
+    .btn-gold:hover { background: #b8854a; transform: translateY(-1px); }
+    .btn-outline-white {
+      border: 2px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.85);
+    }
+    .btn-outline-white:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-outline-navy {
+      border: 2px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn-outline-navy:hover { background: var(--navy); color: var(--white); }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 60%, #1e4a6a 100%);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      padding: 100px 8% 80px;
+      gap: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 80% 30%, rgba(77,168,181,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 10% 70%, rgba(201,149,90,0.06) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+    .hero-headline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 700; line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 1.4rem;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--teal);
+    }
+    .hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.6);
+      line-height: 1.85; margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+    /* Decorative shape */
+    .hero-deco {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .deco-rings {
+      position: relative; width: 320px; height: 320px;
+    }
+    .deco-ring {
+      position: absolute; border-radius: 50%;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      border-style: solid;
+    }
+    .deco-ring:nth-child(1) { width: 320px; height: 320px; border-width: 1px; border-color: rgba(77,168,181,0.12); }
+    .deco-ring:nth-child(2) { width: 260px; height: 260px; border-width: 1px; border-color: rgba(77,168,181,0.18); }
+    .deco-ring:nth-child(3) { width: 200px; height: 200px; border-width: 1.5px; border-color: rgba(77,168,181,0.28); }
+    .deco-ring:nth-child(4) { width: 140px; height: 140px; border-width: 2px; border-color: rgba(77,168,181,0.4); }
+    .deco-ring:nth-child(5) { width: 80px; height: 80px; border-width: 2.5px; border-color: var(--teal); background: rgba(77,168,181,0.08); }
+    .deco-center {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px; height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.85;
+    }
+    .deco-tagline {
+      position: absolute; bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(77,168,181,0.6);
+    }
+
+    /* ── SHARED SECTION STYLES ────────────────────────── */
+    section { padding: 6rem 8%; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--navy); margin-bottom: 1.2rem;
+    }
+    .section-rule {
+      width: 44px; height: 3px; background: var(--gold);
+      margin-bottom: 2.2rem;
+    }
+
+    /* ── WHAT WE OFFER ────────────────────────────────── */
+    #offer { background: var(--cream); }
+    .offer-intro {
+      max-width: 640px;
+      font-size: 1rem; color: var(--gray); line-height: 1.85;
+      margin-bottom: 3.2rem;
+    }
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+    .offer-card {
+      background: var(--white);
+      border-top: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1.8rem;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .offer-card:hover { box-shadow: 0 10px 34px rgba(28,56,86,0.1); transform: translateY(-2px); }
+    .offer-icon {
+      width: 36px; height: 36px;
+      background: rgba(77,168,181,0.12);
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .offer-icon-dot {
+      width: 10px; height: 10px;
+      background: var(--teal); border-radius: 50%;
+    }
+    .offer-card h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .offer-card p {
+      font-size: 0.88rem; color: var(--gray); line-height: 1.7;
+    }
+
+    /* ── THE JOURNEY ──────────────────────────────────── */
+    #journey { background: var(--white); }
+    .journey-intro {
+      max-width: 600px;
+      font-size: 1rem; color: var(--gray); line-height: 1.85;
+      margin-bottom: 3.2rem;
+    }
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .journey-card {
+      border-radius: 4px;
+      padding: 2rem;
+      border-top: 4px solid var(--gold);
+      background: var(--cream);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .journey-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,0.07); transform: translateY(-2px); }
+    .journey-card.border-teal { border-top-color: var(--teal); }
+    .journey-card.border-navy { border-top-color: var(--navy); }
+
+    .journey-stage {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .journey-card.border-teal .journey-stage { color: var(--teal); }
+    .journey-card.border-navy .journey-stage { color: var(--navy); }
+
+    .journey-card h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 0.5rem;
+    }
+    .journey-card > p {
+      font-size: 0.85rem; color: var(--gray);
+      margin-bottom: 1.1rem; line-height: 1.6;
+    }
+    .journey-bullets {
+      list-style: none; margin-bottom: 1.4rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .journey-bullets li {
+      font-size: 0.84rem; color: var(--gray);
+      padding-left: 1rem; position: relative; line-height: 1.5;
+    }
+    .journey-bullets li::before {
+      content: '·'; position: absolute; left: 0;
+      color: var(--teal); font-size: 1.4rem; line-height: 0.9;
+    }
+    .journey-card blockquote {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.88rem; font-style: italic;
+      color: var(--navy); line-height: 1.55;
+      border-left: 3px solid var(--gold);
+      padding-left: 0.9rem;
+    }
+    .journey-card.border-teal blockquote { border-left-color: var(--teal); }
+    .journey-card.border-navy blockquote { border-left-color: var(--navy); }
+
+    /* ── THE HOTLINE ──────────────────────────────────── */
+    #hotline {
+      background: var(--dark);
+      padding: 6rem 8%;
+    }
+    #hotline .section-label { color: var(--teal); }
+    #hotline .section-title { color: var(--white); }
+    #hotline .section-rule { background: var(--gold); }
+
+    .hotline-intro {
+      max-width: 680px;
+      font-size: 1rem; color: rgba(255,255,255,0.6);
+      line-height: 1.85; margin-bottom: 3rem;
+    }
+
+    .hotline-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .hotline-who h4 {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 1rem;
+    }
+    .hotline-who-list {
+      list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .hotline-who-list li {
+      font-size: 0.9rem; color: rgba(255,255,255,0.7);
+      padding-left: 1.2rem; position: relative; line-height: 1.5;
+    }
+    .hotline-who-list li::before {
+      content: ''; position: absolute; left: 0; top: 0.6rem;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .hotline-happens-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .hotline-card {
+      background: rgba(77,168,181,0.1);
+      border: 1px solid rgba(77,168,181,0.2);
+      border-radius: 4px;
+      padding: 1.4rem;
+      font-size: 0.88rem; color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+    }
+    .hotline-card::before {
+      content: '';
+      display: block; width: 24px; height: 2px;
+      background: var(--teal); margin-bottom: 0.8rem;
+      border-radius: 2px;
+    }
+
+    .hotline-cta {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hotline-cta .btn-gold { font-size: 1rem; padding: 1rem 3rem; }
+    .hotline-pills {
+      margin-top: 1rem;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+    }
+
+    /* ── OUR STORY ────────────────────────────────────── */
+    #story { background: var(--cream); }
+    #story .section-title { color: var(--navy); }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 5rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+    .story-text p {
+      font-size: 1rem; color: var(--gray); line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-pullquote {
+      background: var(--navy);
+      border-radius: 4px;
+      padding: 2.4rem;
+      border-left: 4px solid var(--gold);
+    }
+    .story-pullquote p {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      font-style: italic; font-weight: 700;
+      color: var(--white); line-height: 1.55;
+    }
+
+    .mission-box {
+      background: var(--navy);
+      border-radius: 4px;
+      padding: 2.4rem 3rem;
+      text-align: center;
+    }
+    #mission { display: block; }
+    .mission-box .mission-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 1rem;
+    }
+    .mission-box p {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: rgba(255,255,255,0.85); line-height: 1.7;
+    }
+    .mission-box p strong { color: var(--gold); }
+
+    /* ── CONTACT ──────────────────────────────────────── */
+    #contact { background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-col h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 1rem;
+    }
+    .contact-col p {
+      font-size: 0.92rem; color: var(--gray); line-height: 1.8;
+      margin-bottom: 1.4rem;
+    }
+    .contact-email {
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--navy); border-bottom: 2px solid var(--teal);
+      padding-bottom: 2px; transition: color 0.2s;
+      display: inline-block;
+    }
+    .contact-email:hover { color: var(--teal); }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      padding: 2.4rem 8%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.2rem;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 0.3rem; }
+    .footer-brand .brand-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.95rem; font-weight: 700; color: var(--white);
+    }
+    .footer-brand .brand-copy {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    }
+    .footer-back {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.4rem 0.9rem; border-radius: 2px;
+    }
+    .footer-back:hover { color: var(--teal); border-color: var(--teal); }
+    .footer-links {
+      display: flex; gap: 1.4rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .offer-grid { grid-template-columns: repeat(2, 1fr); }
+      .journey-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .hotline-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hotline-happens-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 820px) {
+      #hero { grid-template-columns: 1fr; padding: 90px 7% 60px; }
+      .hero-deco { display: none; }
+      .story-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 0 5%; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4rem 6%; }
+      #hotline { padding: 4rem 6%; }
+      .offer-grid { grid-template-columns: 1fr; }
+      .hotline-happens-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .deco-rings { width: 200px; height: 200px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════ NAV ═══════════════════════════════════════════ -->
+<nav>
+  <div class="nav-brand">
+    <div class="logo-mark">
+      <div class="logo-circle"></div>
+      <div class="logo-hand"></div>
+    </div>
+    <div class="logo-text">
+      <div class="logo-name">SolaceCare</div>
+      <div class="logo-sub">Network</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#offer">About</a></li>
+    <li><a href="#offer">What We Offer</a></li>
+    <li><a href="#hotline">The Hotline</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#hotline" class="btn-nav">Call Now</a>
+  <button class="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════ HERO ════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Peer-Led &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Free</p>
+    <h1 class="hero-headline">
+      When illness enters your life —<br>
+      <em>we are here to listen.</em>
+    </h1>
+    <p class="hero-sub">
+      Wherever you are in the journey — newly diagnosed, in treatment, or long after — SolaceCare Network exists for you.
+    </p>
+    <div class="hero-btns">
+      <a href="#hotline" class="btn btn-gold">Call the Hotline</a>
+      <a href="#offer" class="btn btn-outline-white">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-deco">
+    <div class="deco-rings">
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-center"></div>
+      <div class="deco-tagline">Compassionate Listening</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WHAT WE OFFER ════════════════════════════════════ -->
+<section id="offer">
+  <p class="section-label fade-up">What We Offer</p>
+  <h2 class="section-title fade-up delay-1">A Human Voice When Everything Feels Unreal</h2>
+  <div class="section-rule fade-up delay-2"></div>
+  <p class="offer-intro fade-up delay-2">
+    SolaceCare Network connects people affected by serious illness with trained peer listeners who have walked a similar path. No advice. No agenda. Just steady, compassionate human presence — at every stage of the journey.
+  </p>
+
+  <div class="offer-grid">
+    <div class="offer-card fade-up delay-1">
+      <div class="offer-icon"><div class="offer-icon-dot"></div></div>
+      <h3>Confidential Listening</h3>
+      <p>A trained listener with lived experience answers every call. What you share stays with us.</p>
+    </div>
+    <div class="offer-card fade-up delay-2">
+      <div class="offer-icon"><div class="offer-icon-dot"></div></div>
+      <h3>Non-Judgmental Presence</h3>
+      <p>No advice. No pressure. Just compassionate human presence, without an agenda.</p>
+    </div>
+    <div class="offer-card fade-up delay-3">
+      <div class="offer-icon"><div class="offer-icon-dot"></div></div>
+      <h3>Every Stage of the Journey</h3>
+      <p>Whether you are newly diagnosed, deep in treatment, or years after — we are here.</p>
+    </div>
+    <div class="offer-card fade-up delay-1">
+      <div class="offer-icon"><div class="offer-icon-dot"></div></div>
+      <h3>Free. Always.</h3>
+      <p>SolaceCare will never charge for listening. Not now. Not ever.</p>
+    </div>
+    <div class="offer-card fade-up delay-2">
+      <div class="offer-icon"><div class="offer-icon-dot"></div></div>
+      <h3>Peer-Led Support</h3>
+      <p>Our listeners have walked a similar path. They understand in ways that clinical care often cannot.</p>
+    </div>
+    <div class="offer-card fade-up delay-3">
+      <div class="offer-icon"><div class="offer-icon-dot"></div></div>
+      <h3>Emotional Grounding</h3>
+      <p>Steadiness when shock, fear, or grief feel overwhelming. We stay on the line.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ THE JOURNEY ════════════════════════════════════════ -->
+<section id="journey">
+  <p class="section-label fade-up">Every Stage</p>
+  <h2 class="section-title fade-up delay-1">Illness Does Not Move in a Straight Line</h2>
+  <div class="section-rule fade-up delay-2"></div>
+  <p class="journey-intro fade-up delay-2">
+    The illness journey has no single shape. It moves forward, backward, sideways, and sometimes seems to stop entirely. SolaceCare is present at every turn.
+  </p>
+
+  <div class="journey-grid">
+
+    <div class="journey-card fade-up delay-1">
+      <div class="journey-stage">Stage 1</div>
+      <h3>When the News Is New</h3>
+      <p>For those who have just received a diagnosis.</p>
+      <ul class="journey-bullets">
+        <li>Shock, disbelief, confusion</li>
+        <li>Overwhelming decisions</li>
+        <li>Feeling frozen or numb</li>
+      </ul>
+      <blockquote>"You don't need answers right now. You need someone who will listen and help you breathe."</blockquote>
+    </div>
+
+    <div class="journey-card border-teal fade-up delay-2">
+      <div class="journey-stage">Stage 2</div>
+      <h3>During Treatment</h3>
+      <p>For those currently in treatment or living with active illness.</p>
+      <ul class="journey-bullets">
+        <li>Physical pain and exhaustion</li>
+        <li>Anxiety and fear</li>
+        <li>Isolation and emotional overload</li>
+        <li>Caregivers carrying silent weight</li>
+      </ul>
+      <blockquote>"We listen when treatment feels endless and strength feels thin."</blockquote>
+    </div>
+
+    <div class="journey-card border-navy fade-up delay-3">
+      <div class="journey-stage">Stage 3</div>
+      <h3>After Treatment</h3>
+      <p>For those who are done with treatment but not yet healed.</p>
+      <ul class="journey-bullets">
+        <li>Chronic pain or disability</li>
+        <li>Medical debt and job loss</li>
+        <li>Depression and loneliness</li>
+        <li>The world expects you to move on</li>
+      </ul>
+      <blockquote>"Survival is not the same as recovery. We stay when everyone else has moved on."</blockquote>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════ THE HOTLINE ════════════════════════════════════════ -->
+<section id="hotline">
+  <p class="section-label fade-up">The SolaceCare Hotline</p>
+  <h2 class="section-title fade-up delay-1">A Place to Call — No Matter Where You Are</h2>
+  <div class="section-rule fade-up delay-2"></div>
+  <p class="hotline-intro fade-up delay-2">
+    The SolaceCare Hotline is a confidential, peer-led listening line for individuals whose lives have been impacted by serious illness. It is not therapy. It is not medical advice. It is human presence, without an agenda.
+  </p>
+
+  <div class="hotline-layout fade-up delay-2">
+    <div class="hotline-who">
+      <h4>Who It's For</h4>
+      <ul class="hotline-who-list">
+        <li>People newly diagnosed with a serious illness</li>
+        <li>Patients currently in treatment</li>
+        <li>Survivors who are still hurting</li>
+        <li>People living with illness-related chronic pain, disability, or addiction</li>
+        <li>Caregivers carrying the weight of someone else's illness</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;">What Happens When You Call</h4>
+      <div class="hotline-happens-grid">
+        <div class="hotline-card">You speak with a trained listener with lived experience of serious illness</div>
+        <div class="hotline-card">You are not rushed, judged, or told how to feel</div>
+        <div class="hotline-card">You may talk, cry, sit in silence, or simply be present</div>
+        <div class="hotline-card">You are met with patience, respect, and genuine care</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hotline-cta fade-up">
+    <a href="#contact" class="btn btn-gold">Call the Hotline</a>
+    <p class="hotline-pills">Free &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Peer-Led</p>
+  </div>
+</section>
+
+<!-- ═══════ OUR STORY ════════════════════════════════════════ -->
+<section id="story">
+  <p class="section-label fade-up">Our Story</p>
+  <h2 class="section-title fade-up delay-1">Why SolaceCare Exists</h2>
+  <div class="section-rule fade-up delay-2"></div>
+
+  <div class="story-layout">
+    <div class="story-text fade-up delay-2">
+      <p>Victor Kilanko was diagnosed with stage IV cancer, described at the time as terminal. Treatment saved his life, but it permanently altered it. He couldn't walk for months. He was afraid, anxious, and financially devastated. When treatment ended, support largely disappeared. The pain remained.</p>
+      <p>What he learned is simple and devastating: most care systems are built for treatment, not for the life that follows.</p>
+      <p>SolaceCare Network was created to fill that gap, offering listening, presence, and dignity at every stage of the journey.</p>
+    </div>
+    <div class="story-pullquote fade-up delay-3">
+      <p>"Sometimes the most healing thing is knowing that someone will stay on the line."</p>
+    </div>
+  </div>
+
+  <div id="mission" class="mission-box fade-up">
+    <div class="mission-label">Our Mission</div>
+    <p><strong>To listen with compassion and without judgment</strong> to people affected by serious illness, before, during, and after treatment, offering steadiness, dignity, and human connection when life is disrupted or permanently changed.</p>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ══════════════════════════════════════════ -->
+<section id="contact">
+  <p class="section-label fade-up">Connect</p>
+  <h2 class="section-title fade-up delay-1">Reach Out</h2>
+  <div class="section-rule fade-up delay-2"></div>
+
+  <div class="contact-grid">
+    <div class="fade-up delay-2">
+      <h3>For individuals seeking support</h3>
+      <p>If you or someone you care about has been impacted by serious illness, we are here. The SolaceCare Hotline is free, confidential, and peer-led. There is no referral required.</p>
+      <a href="#hotline" class="btn btn-gold">Call the Hotline</a>
+    </div>
+    <div class="fade-up delay-3">
+      <h3>For organizations, hospitals, and partners</h3>
+      <p>For partnership inquiries, hospital referrals, volunteer listener training, or grant collaboration, reach out directly to Victor Kilanko.</p>
+      <a href="mailto:care@solacecarenetwork.org" class="contact-email">care@solacecarenetwork.org</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-brand">
+    <div class="brand-name">SolaceCare Network</div>
+    <div class="brand-copy">© 2025 SolaceCare Network &nbsp;·&nbsp; Founded by Victor Kilanko, PhD</div>
+  </div>
+  <div class="footer-links">
+    <a href="#offer">About</a>
+    <a href="#hotline">The Hotline</a>
+    <a href="#story">Our Story</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="https://victorkilanko.github.io" class="footer-back">← Back to victorkilanko.github.io</a>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Mobile nav
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('nav-open');
+      hamburger.classList.toggle('open');
+    });
+  }
+
+  // Close mobile nav on link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('nav-open');
+      hamburger.classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
